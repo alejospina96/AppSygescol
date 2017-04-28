@@ -1,0 +1,1391 @@
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C" "\201D" "\2018" "\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;color: #000;}button,input{line-height:normal; text-align: center;}button,select{text-transform:none; color:#000;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0; border-color: #fff;}
+
+select
+{
+color: #000;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: 'Questrial',sans-serif;
+}
+div
+{
+color: #fff;
+}
+@font-face {
+	font-family: 'typicons';
+	src:url('../fonts/typicons/typicons.eot');
+	src:url('../fonts/typicons/typicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/typicons/typicons.ttf') format('truetype'),
+		url('../fonts/typicons/typicons.woff') format('woff'),
+		url('../fonts/typicons/typicons.svg#typicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html, body, .perspective {
+	width: 100%;
+	height: 100%;
+}
+
+.perspective {
+	background: transparent;
+	position: relative;
+}
+
+.titulo {
+    text-align: center;
+    font-size: 23px;
+    position: absolute;
+    color: #fff;
+    margin-left: 35%;
+    margin-top: 3%;
+    font-weight: bold;
+    font-family: 'Questrial';
+}
+
+.container {
+	margin: 0;
+	background: rgba(0,0,0,0.3);
+	min-height: 100%;
+	position: relative;
+	outline: 1px solid rgba(0,0,0,0);
+	z-index: 10;
+	-webkit-transform: translateZ(0) translateX(0) rotateY(0deg); /* reset transforms (Chrome bug) */
+	transform: translateZ(0) translateX(0) rotateY(0deg);
+}
+
+.container::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0px;
+	opacity: 0;
+	background: rgba(0,0,0,0.2);
+	/* the transition delay of the height needs to be synced with the container transition time */
+	-webkit-transition: opacity 0.4s, height 0s 0.4s;
+	transition: opacity 0.4s, height 0s 0.4s;
+}
+
+.wrapper {
+	position: relative;
+}
+
+.component {
+	margin: 0 auto;
+	width: 60%;
+	text-align: justify;
+	font-size: 1.5em;
+}
+
+/* Modal view */
+.perspective.modalview {
+	position: fixed;
+	-webkit-perspective: 1500px;
+	perspective: 1500px;
+}
+
+.modalview .container {
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.modalview .wrapper {
+	-webkit-transform: translateZ(-1px); /* solves a rendering bug in Chrome on Windows */
+}
+
+.animate .container::after {
+	opacity: 1;
+	height: 101%;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+/* Outer Nav */
+.outer-nav {
+	position: absolute;
+	height: auto;
+	font-size: 2em;
+}
+
+.outer-nav.vertical {
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.outer-nav.horizontal {
+	left: 50%;
+	width: 75%;
+	max-width: 1000px;
+	text-align: center;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.outer-nav.left {
+	left: 10%;
+}
+
+.outer-nav.right {
+	right: 25%;
+}
+
+.outer-nav.top {
+	top: 25%;
+}
+
+.outer-nav.bottom {
+	bottom: 25%;
+}
+
+.outer-nav a {
+	display: inline-block;
+	white-space: nowrap;
+	font-weight: 300;
+	margin: 0 0 30px 0;
+	color: #fff;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.outer-nav a:hover {
+	color: #ffdccd;
+}
+
+.outer-nav.vertical a {
+	display: block;
+}
+
+.outer-nav.horizontal a {
+	margin: 15px 20px;
+}
+
+.outer-nav a::before {
+	display: inline-block;
+	font-family: 'typicons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	margin-right: 10px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.icon-news::before { content: "\e600" }
+.icon-home::before { content: "\e601" }
+.icon-image::before { content: "\e602" }
+.icon-upload::before { content: "\e603" }
+.icon-star::before { content: "\e604" }
+.icon-mail::before { content: "\e605" }
+.icon-lock::before { content: "\e606" }
+.icon-chart-pie::before { content: "\e607" }
+
+/* Individual Effects */
+
+/* Effect airbnb */
+.effect-airbnb {
+	margin: 0;
+	background-image: url('http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/fondo_menu.jpg');
+	background-size: 100% 100%;
+}
+
+.effect-airbnb .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+}
+
+.effect-airbnb.animate .container {
+	-webkit-transform: translateZ(-1500px) translateX(100%) rotateY(-45deg);
+	transform: translateZ(-1500px) translateX(100%) rotateY(-45deg);
+}
+
+.no-csstransforms3d .effect-airbnb.animate .container {
+	left: 75%;
+}
+
+.effect-airbnb .outer-nav a {
+	opacity: 0;
+	-webkit-transform: translateX(-150px);
+	transform: translateX(-150px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-airbnb.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.12s;
+	transition-delay: 0.12s;
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-airbnb.animate .outer-nav a:nth-child(7) {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Effect Move Left */
+.effect-moveleft {
+	background: #f4f3f1;
+}
+
+.effect-moveleft .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+}
+
+.effect-moveleft .container::after {
+	background: rgba(255,255,255,0.6);
+}
+
+.effect-moveleft.animate .container {
+	-webkit-transform: translateX(-50%) rotateY(45deg) translateZ(-50px);
+	transform: translateX(-50%) rotateY(45deg) translateZ(-50px);
+}
+
+.no-csstransforms3d .effect-moveleft.animate .container {
+	left: -75%;
+}
+
+.effect-moveleft .outer-nav a {
+	color: #862020;
+	opacity: 0;
+	-webkit-transform: translateX(100px) translateZ(-1000px);
+	transform: translateX(100px) translateZ(-1000px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-moveleft .outer-nav a:hover {
+	color: #333;
+}
+
+.effect-moveleft.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateX(0) translateZ(0);
+	transform: translateX(0) translateZ(0);
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.12s;
+	transition-delay: 0.12s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-moveleft.animate .outer-nav a:nth-child(7) {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Effect Rotate Left */
+.effect-rotateleft {
+	background: #e96e4f;
+}
+
+.effect-rotateleft .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 0% 50%;
+	transform-origin: 0% 50%;
+}
+
+.effect-rotateleft .container::after {
+	background: rgba(255,255,255,0.6);
+}
+
+.effect-rotateleft.animate .container {
+	-webkit-transform: translateZ(-1800px) translateX(-50%) rotateY(45deg);
+	transform: translateZ(-1800px) translateX(-50%) rotateY(45deg);
+}
+
+.no-csstransforms3d .effect-rotateleft.animate .container {
+	left: -75%;
+}
+
+.effect-rotateleft .outer-nav a {
+	opacity: 0;
+	-webkit-transform: translateX(350px) translateZ(-1000px);
+	transform: translateX(350px) translateZ(-1000px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-rotateleft.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateX(0) translateZ(0);
+	transform: translateX(0) translateZ(0);
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-rotateleft.animate .outer-nav a:nth-child(7) {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Effect Move Down */
+.effect-movedown {
+	background: #34495e;
+}
+
+.effect-movedown .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+}
+
+.effect-movedown .container::after {
+	background: rgba(52, 73, 94, 0.5);
+}
+
+.effect-movedown.animate .container {
+	-webkit-transform: translateY(100%) translateZ(-1500px);
+	transform: translateY(100%) translateZ(-1500px);
+}
+
+.no-csstransforms3d .effect-movedown.animate .container {
+	top: 75%;
+}
+
+.effect-movedown .outer-nav a {
+	opacity: 0;
+	-webkit-transform: translateY(-20px);
+	transform: translateY(-20px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-movedown .outer-nav a:hover {
+	color: #862020;
+}
+
+.effect-movedown.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.12s;
+	transition-delay: 0.12s;
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-movedown.animate .outer-nav a:nth-child(7) {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Effect Rotate Top */
+.effect-rotatetop {
+	background: #edcdbb;
+}
+
+.effect-rotatetop .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+}
+
+.effect-rotatetop .container::after {
+	background: rgba(94,59,43,0.6);
+}
+
+.effect-rotatetop.animate .container {
+	-webkit-transform: translateZ(-1500px) translateY(-50%) rotateX(-45deg);
+	transform: translateZ(-1500px) translateY(-50%) rotateX(-45deg);
+}
+
+.no-csstransforms3d .effect-rotatetop.animate .container {
+	top: -75%;
+}
+
+.effect-rotatetop .outer-nav a {
+	opacity: 0;
+	color: #862020;
+	-webkit-transform: translateY(200px) translateZ(-1000px);
+	transform: translateY(200px) translateZ(-1000px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-rotatetop .outer-nav a:hover {
+	color: #777;
+}
+
+.effect-rotatetop.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateY(0) translateZ(0);
+	transform: translateY(0) translateZ(0);
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.12s;
+	transition-delay: 0.12s;
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-rotatetop.animate .outer-nav a:nth-child(7) {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Effect Lay Down */
+.effect-laydown {
+	background-image: url('http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/fondo_menu.jpg');
+	background-size: 100% 100%;
+	width: 100%;
+}
+
+.effect-laydown .container {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform-origin: 50% 150%;
+	transform-origin: 50% 150%;
+}
+
+.effect-laydown.animate .container {
+	-webkit-transform: translateZ(-1500px) rotateX(80deg);
+	transform: translateZ(-1500px) rotateX(80deg);
+}
+
+.no-csstransforms3d .effect-laydown.animate .container {
+	top: 75%;
+}
+
+.effect-laydown .outer-nav a {
+	opacity: 0;
+	-webkit-transform: translateY(-200px) translateZ(-1000px);
+	transform: translateY(-200px) translateZ(-1000px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.effect-laydown.animate .outer-nav a {
+	opacity: 1;
+	-webkit-transform: translateY(0) translateZ(0);
+	transform: translateY(0) translateZ(0);
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(7){
+	-webkit-transition-delay: 0.0s;
+	transition-delay: 0.0s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(6) {
+	-webkit-transition-delay: 0.04s;
+	transition-delay: 0.04s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(5) {
+	-webkit-transition-delay: 0.08s;
+	transition-delay: 0.08s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(4) {
+	-webkit-transition-delay: 0.12s;
+	transition-delay: 0.12s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(3) {
+	-webkit-transition-delay: 0.16s;
+	transition-delay: 0.16s;
+}
+
+.effect-laydown.animate .outer-nav a:nth-child(2) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.effect-laydown.animate .outer-nav a:first-child {
+	-webkit-transition-delay: 0.24s;
+	transition-delay: 0.24s;
+}
+
+/* Media Queries */
+@media screen and (max-width: 77em) {
+	
+	.outer-nav.top {
+		top: 15%;
+	}
+
+	.outer-nav.bottom {
+		bottom: 15%;
+	}
+}
+
+@media screen and (max-width: 36.625em), screen and (max-height: 41.75em) {
+
+	.outer-nav.top {
+		top: 5%;
+	}
+
+	.outer-nav.bottom {
+		bottom: 5%;
+	}
+	
+	.outer-nav.horizontal {
+		font-size: 1.7em;
+		width: 6.2em;
+	}
+
+	.outer-nav.horizontal a {
+		display: block;
+		text-align: left;
+	}
+
+	/* Special Case */
+	.effect-rotatetop .outer-nav.horizontal {
+		width: 95%;
+		bottom: auto;
+		top: 50%;
+	}
+
+	.effect-rotatetop .outer-nav.horizontal a {
+		display: inline-block;
+	}
+
+}
+
+@media screen and (max-width: 31em), screen and (max-height: 36.2em) {
+	.outer-nav.horizontal,
+	.outer-nav.vertical {
+		font-size: 1.2em;
+		width: 6.8em;
+	}
+
+	.outer-nav.right {
+		right: auto;
+		left: 50%;
+	}
+}
+
+@media screen and (max-height: 31.6em) {
+	.outer-nav a {
+		margin-bottom: 20px;
+	}
+}
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'codropsicons';
+	src:url('../fonts/codropsicons/codropsicons.eot');
+	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+body {
+	background-image: url('http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/fondo_menu.jpg');
+	color: #5a5350;
+	font-weight: 300;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	background-size: 100% 100%;
+	width: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: #862020;
+	outline: none;
+}
+
+a:hover, a:focus {
+	color: #862020;
+	outline: none;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	content: " ";
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.codrops-header,
+.codrops-top {
+	font-family: 'Lato', Arial, sans-serif;
+}
+
+.codrops-header {
+	margin: 0 auto 3em;
+	padding: 3em;
+	text-align: center;
+}
+
+.codrops-header h1 {
+	margin: 0;
+	font-weight: 300;
+	font-size: 2.625em;
+	line-height: 1.3;
+}
+
+.codrops-header span {
+	display: block;
+	padding: 0 0 0.6em 0.1em;
+	font-size: 60%;
+	color: #aca89a;
+}
+
+/* To Navigation Style */
+.codrops-top {
+	width: 100%;
+	text-transform: uppercase;
+	font-size: 0.69em;
+	line-height: 2.2;
+	font-weight: 700;
+	background: rgba(255,255,255,0.3);
+}
+
+.codrops-top a {
+	display: inline-block;
+	padding: 0 1em;
+	text-decoration: none;
+	letter-spacing: 0.1em;
+}
+
+.codrops-top a:hover {
+	background: rgba(255,255,255,0.4);
+	color: #333;
+}
+
+.codrops-top span.right {
+	float: right;
+}
+
+.codrops-top span.right a {
+	display: block;
+	float: left;
+}
+
+.codrops-icon:before {
+	margin: 0 4px;
+	text-transform: none;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-family: 'codropsicons';
+	line-height: 1;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+.codrops-icon-drop:before {
+	content: "\e001";
+}
+
+.codrops-icon-prev:before {
+	content: "\e004";
+}
+
+.main {
+	max-width: 69em;
+	margin: 0 auto;
+}
+
+.column {
+	float: left;
+	width: 50%;
+	padding: 0 2em;
+	min-height: 70px;
+	background: #862020;
+	position: relative;
+	text-align: right;
+	width: 100%;
+}
+
+.column:nth-child(2) {
+	box-shadow: -1px 0 0 rgba(0,0,0,0.1);
+	text-align: left;
+}
+
+.column p {
+	font-weight: 300;
+	font-size: 2em;
+	padding: 0 0 0.5em;
+	margin: 0;
+	line-height: 1.5;
+}
+
+.codrops-demos a,
+button {
+	border: none;
+	padding: 0.6em 1.2em;
+	background: #a9a9a9;
+	color: #fff;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	font-size: 1em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: inline-block;
+	margin: 10px;
+	border-radius: 2px;
+	font-weight: 400;
+	outline: none;
+}
+
+.codrops-demos a:hover,
+.codrops-demos a:active,
+.codrops-demos a.current-demo {
+	background: #777;
+}
+
+button {
+	font-size: 75%;
+	background: #862020;
+}
+
+button:hover,
+button:active {
+	background: #862020;
+}
+
+.related {
+	text-align: center;
+	font-size: 1.5em;
+	margin-top: 3em;
+	clear: both;
+	padding: 3em 0;
+}
+
+.related a {
+	font-weight: 700;
+	font-size: 0.9em;
+}
+
+@media screen and (max-width: 46.0625em) {
+
+	.codrops-header {
+		margin-bottom: 0;
+		padding-bottom: 1em;
+	}
+
+	.column {
+		width: 100%;
+		min-width: auto;
+		min-height: 0;
+		padding: 0em; 
+		text-align: center;
+	}
+
+	.column p {
+		font-size: 1.5em;
+	}
+
+	.column:nth-child(2) {
+		text-align: center;
+		box-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+	}
+}
+
+@media screen and (max-width: 25em) {
+
+	.codrops-header {
+		font-size: 80%;
+	}
+
+	.codrops-top {
+		font-size: 120%;
+	}
+
+	.codrops-icon span {
+		display: none;
+	}
+
+}
+.select {
+  color:#000; 
+  border: 1px solid #ccc;
+  width: 140px;
+  overflow: hidden;
+  background: #fff url("http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/arrowdown.gif") no-repeat 90% center;
+  
+}
+  .select select {
+  	color: #000;
+    padding: 5px 8px;
+    width: 130%;
+  }
+     .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: transparent;
+		
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+.celda{
+height: auto;
+width: 200px;
+}
+input {
+    width: 270px;
+    height: 42px;
+    margin-top: 25px;
+    padding: 0 15px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    background: rgba(45,45,45,.15);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d; /* browsers that don't support rgba */
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+input:-moz-placeholder { color: #fff; }
+input:-ms-input-placeholder { color: #fff; }
+input::-webkit-input-placeholder { color: #fff; }
+
+input:focus {
+    outline: none;
+    -moz-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+.boton {
+    cursor: pointer;
+    width: 270px;
+    height: 44px;
+    margin-top: 25px;
+    padding: 0;
+    background: #760303;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #760303;
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+    box-shadow: 0 15px 30px 0 rgba(255,255,255,.25) inset, 0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+.boton:hover {
+     -moz-box-shadow: 0 15px 30px 0 rgba(255,255,255,.15) inset, 0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(255,255,255,.15) inset, 0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow: 0 15px 30px 0 rgba(255,255,255,.15) inset, 0 2px 7px 0 rgba(0,0,0,.2);
+}
+.centrar {
+    overflow: hidden;
+    position: absolute;
+    height: 153px;
+    width: 414px;
+    left: 50%;
+    font-weight: bold;
+    font-size: 27px;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -195px;
+}
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 35%;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    background: #fff url("www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/arrowdown.gif") no-repeat 90% 50%;
+}
+.desem {
+width: 60%;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+.obser{
+	word-wrap: break-word;
+    white-space: pre-wrap;
+    padding: 0 2px 0 0;
+    min-width: 20px;
+    max-width: 400px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.check:checked + .slider {
+  background-color: #862020;
+}
+
+.check:focus + .slider {
+  box-shadow: 0 0 1px #862020;
+}
+
+.check:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.tabla
+{
+background: rgba(45,43,43,0.5);
+}
+.js .inputfile {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+/* style 4 */
+
+.inputfile-4 + label {
+    color: #fff;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.inputfile-4:focus + label,
+.inputfile-4.has-focus + label,
+.inputfile-4 + label:hover {
+    color: #fff;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.inputfile-4 + label figure {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+    color:#862020;
+    display: block;
+    padding: 20px;
+    margin: 0 auto 10px;
+}
+
+.inputfile-4:focus + label figure,
+.inputfile-4.has-focus + label figure,
+.inputfile-4 + label:hover figure {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background-color: #862020;
+    color: #fff;
+}
+.inputfile-4 + label:hover .icono_subir {
+	color:#fff;
+    background-color: #862020;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.inputfile-4 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #f1e5e6;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.icono_subir{
+	z-index: 9999;
+	font-size: 300%;
+	margin-left: -107%;
+}
+span.ui-datepicker-year {
+    color: #000;
+}
+span.ui-datepicker-month {
+    color: #000;
+}
+
+.error {
+    width:200px;
+    height:20px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+    bottom:10px;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 20px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+.radiobutton{
+  display: block;
+  position: absolute;
+  margin: auto;
+  height: 450px;
+width: 100%;
+  bottom: 0; left:0; right: 0; top:0;
+  padding: 0;
+}
+
+.radiobutton ul{
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+.radiobutton ul li{
+  color: #FFFFFF;
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 100px;
+	border-bottom: 1px solid #111111;
+}
+
+.radiobutton ul li input[type=radio]{
+  position: absolute;
+  visibility: hidden;
+}
+
+.radiobutton ul li label{
+  display: block;
+  position: relative;
+  font-weight: 300;
+  font-size: 1.35em;
+  padding: 25px 25px 25px 80px;
+  margin: 10px auto;
+  height: 30px;
+  z-index: 9;
+  cursor: pointer;
+  -webkit-transition: all 0.25s linear;
+}
+
+.radiobutton ul li:hover label{
+	color: #AAAAAA;
+}
+
+.radiobutton ul li .check{
+  display: block;
+  position: absolute;
+  border: 5px solid #AAAAAA;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  top: 30px;
+  left: 20px;
+	z-index: 5;
+	transition: border .25s linear;
+	-webkit-transition: border .25s linear;
+}
+
+.radiobutton ul li:hover .check {
+  border: 5px solid #FFFFFF;
+}
+
+.radiobutton ul li .check::before {
+  display: block;
+  position: absolute;
+	content: '';
+  border-radius: 100%;
+  height: 11px;
+  width: 11px;
+  top: 2px;
+left: 2px;
+  margin: auto;
+	transition: background 0.25s linear;
+	-webkit-transition: background 0.25s linear;
+}
+
+.radiobutton input[type=radio]:checked ~ .check {
+  border: 5px solid #862020;
+}
+
+.radiobutton input[type=radio]:checked ~ .check::before{
+  background-color: #862020;
+}
+.radiobutton input[type=radio]:checked ~ label{
+  color: #862020;
+}
+.pendientes
+{
+pointer-events: none;
+cursor: default;
+font-size: 25px;
+}
+.pendientes li {
+    list-style: none;
+}
+.pendientes a
+{
+color: #fff;
+font-weight: bold;
+font-size: xx-large;
+}
