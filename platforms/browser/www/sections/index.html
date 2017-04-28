@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>S Y G E S C O L</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+  <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body onload="checkCookie()">
+    <div id="perspective" class="perspective effect-airbnb">
+      <div class="container">
+        <div class="wrapper" style="display:none">
+          <div class="main clearfix">
+            <div class="column">
+              <div class="menu_bar"><button id="showMenu" style="float:left;"><span class="icon-menu"></span></button><div class="titulo">APP Sygescol</div></div>
+            </div>
+          </div>
+        </div>
+<div id="carga"></div>
+<div id="container"></div>
+
+      </div>
+      <nav class="outer-nav left vertical">
+        <a href="javascript: void(0);"><span class="icon-home"></span>&nbsp;&nbsp;Inicio</a>
+        <a href="javascript: void(0);" onclick="sygescol_online();"><span class="icon-earth"></span>&nbsp;&nbsp;Sygescol Online</a>
+        <a href="javascript: void(0);" onclick="cerrar_sesion()"><span class="icon-user-minus"></span>&nbsp;&nbsp;Cerrar Sesion</a>
+      </nav>
+    </div>
+    <link href='https://fonts.googleapis.com/css?family=Questrial|Archivo+Black' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/menu.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/utilidades.js"></script>
+  </body>
+</html>

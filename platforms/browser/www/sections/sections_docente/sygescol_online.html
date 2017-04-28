@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>S Y G E S C O L</title>
+
+    <link rel="stylesheet" type="text/css" href="../../css/normalize.css" />
+  <link rel="stylesheet" href="../../css/style.css">
+  </head>
+  <body onload="pae()">
+    <div id="perspective" class="perspective effect-airbnb">
+      <div class="container">
+        <div class="wrapper">
+          <div class="main clearfix">
+            <div class="column">
+              <div class="menu_bar"><button id="showMenu" style="float:left;"><span class="icon-menu"></span></button><div class="titulo">Sygescol Online</div></div>
+            </div>
+          </div>
+        </div>
+<div id="carga" style="display:none">
+<link rel="stylesheet" type="text/css" href="http://www.ietsagradafamilia.edu.co/sygescol2016/reconocimiento_pae/css/animate.css">
+<div class="animated slideInUp" style="animation-delay:0.6s;
+        -webkit-animation-delay:0.6s;"><img src="http://www.ietsagradafamilia.edu.co/sygescol2016/reconocimiento_pae/img/ayuda_menu.png" width="36%" style="margin-left: -3%;"></div>
+<div class="centrar animated zoomInDown" style="animation-delay:0.6s;
+        -webkit-animation-delay:0.6s;"><center><h3 style="margin: auto;">Presione en este boton para continuar</h3></center></div>
+</div>
+<div id="container"></div>
+<div class='error animated shake' style='display:none' id="pendientes_transporte" onclick="redireccionar_pendientes();">Hay Pendientes en Transporte Escolar</div>
+<div class='error animated shake' style='display:none' id="prestamo_verificado" onclick="redireccionar_pendientes_prestamo();">Recursos Institucionales</div>
+      </div>
+      <nav class="outer-nav left vertical">
+        <a href="javascript: void(0);" onclick="inicio();"><span class="icon-home"></span>&nbsp;&nbsp;Inicio</a>
+        <a href="javascript: void(0);" onclick="consulta_y_registro();"><span class="icon-stackoverflow"></span>&nbsp;&nbsp;Consultas y Registros</a>
+        <a href="javascript: void(0);" onclick="control_asistencia()"><span class="icon-user-check"></span>&nbsp;&nbsp;Control de Asistencia</a>
+        <a href="javascript: void(0);" onclick="interaccion_acudientes();"><span class="icon-users"></span>&nbsp;&nbsp;Interacción con Acudientes</a>
+        <a href="javascript: void(0);" onclick="observador_estudiante();"><span class="icon-profile"></span>&nbsp;&nbsp;Observador del Alumno</a>
+        <a href="javascript: void(0);" onclick="recursos_institucionales();"><span class="icon-briefcase"></span>&nbsp;&nbsp;Recursos Institucionales</a>
+        <a href="javascript: void(0);" id="pae" onclick="alimentacion_escolar();" style="display:none;"><span class="icon-spoon-knife"></span>&nbsp;&nbsp;P.A.E</a>
+        <a href="javascript: void(0);" id="transporte" onclick="transporte_escolar();" style="display:none;"><span class="icon-road"></span>&nbsp;&nbsp;Transporte Escolar</a>
+      </nav>
+    </div>
+    <!-- ENGANCHES -->
+    <link href='https://fonts.googleapis.com/css?family=Questrial|Archivo+Black' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/menu.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../cordova.js"></script>   
+    <script type="text/javascript" charset="utf-8" src="../../js/utilidades.js"></script>  <!-- Enganche con las funciones de Utilidades -->
+  </body>
+</html>

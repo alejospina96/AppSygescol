@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Ingreso Sygescol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+    <link rel="stylesheet" href="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/css/reset.css">
+    <link rel="stylesheet" href="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/css/supersized.css">
+    <link rel="stylesheet" href="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/css/style.css">
+
+
+
+    <!--link  font-->   
+    <link href='https://fonts.googleapis.com/css?family=Questrial|Archivo+Black' rel='stylesheet' type='text/css'>
+
+
+
+
+    <!-- Bootstrap -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--/ Bootstrap -->
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/js/supersized.3.2.7.min.js"></script>
+    <script src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/js/supersized-init.js"></script>
+    <script src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/js/scripts.js"></script>
+
+
+
+
+
+
+
+
+    <script>
+
+//VALIDACION DE USUARIOS
+function valida_sesion()
+{
+    var usuario = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+// Validacion campos Vacios
+if (usuario == "" || password == "") 
+{
+    $("#valida_sesion").html("<img src='http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/info.png'><br><p>Debe llenar todos los campos</p>");
+}
+//Validacion Campos  Llenos
+if (usuario != "" && password != "") 
+{
+    /////////////////////////////////VALIDACION Y REDIRECCIONAMIENTO/////////////////////////
+    jQuery.ajax({
+
+            type: "POST",  //Metodo de Envio
+            url: "http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/php/valida_session.php",  //Url a la cual Envio informacion
+            data: "username="+usuario+"&password="+password,    //Que voy a Enviar
+
+            beforeSend: function(){
+                ///Mientras se Ejecuta la Consulta y verificacion Debe salir esto
+                $('#valida_sesion').html('<img src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/progress2.gif"/><br><p class="tmf">verificando</p>');
+            },
+
+            ///A=VALOR_CONSULTA
+            //Aqui entra la informacion de la Consulta del Usuario
+            success: function(a) 
+            {
+
+                if(a != 0 && a != 9)
+                {
+
+
+                   localStorage.setItem("username",usuario);
+                   localStorage.setItem("password",password);
+                   localStorage.setItem("rol",a);
+                   $('#valida_sesion').html('<img src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/success.png"/><br><p class="tmf" >Inicio de Sesi&oacute;n Correcto. Redireccionando</p>');
+
+                   setTimeout(function(){
+                //////Redireccionamiento al Host
+                window.location.href = "sections/index.html";
+                     }, 2000);
+
+               }
+               else if(a == 9)
+               {
+                ////Si La variable devuelta tiene un 9 Es por que no tiene Un Rol
+                $('#valida_sesion').html('<img src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/error.png"/><br><p class="tmf">Usted no tiene un rol definido</p>');
+            }
+            else
+            {
+
+                $('#valida_sesion').html('<img src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/error.png"/><br><p class="tmf">Usuario Y/O Contrase&ntilde;a Incorrectos</p>');
+            }
+
+        },
+            ///////Si ninguna de las anteriores se Cumple es por que se callo la Conexion
+            error: function(){
+                $('#valida_sesion').html('<img src="http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/assets/img/error.png"/><br><p class="tmf">Hubo un error en el procesamiento de datos, favor intente nuevamente</p>');
+            }
+        })
+}
+
+}
+
+
+
+
+/////verificacion de usuario Verifica si la sesion esta iniciada
+function checkCookie() {
+
+///Validacion Para ver si el usuario Es diferente de NULL
+if (localStorage.getItem("username") != null) 
+{
+
+  var _originalSize = $(window).width() + $(window).height()
+  $(window).resize(function(){
+
+    if($(window).width() + $(window).height() != _originalSize){
+
+      console.log("keyboard show up");
+      alert("keyboard show up");
+
+  }else{
+
+      console.log("keyboard closed");
+      alert("keyboard closed");  
+
+  }
+});
+  
+  ///Redireccionamiento a index.html de Secciones
+  window.location.href = "sections/index.html";
+}
+
+}
+
+</script>
+</head>
+
+
+<body onload="checkCookie()">    <!-- cuando cargue la pagina se va a ir a la funciobn checkCookie -->
+    <br><br>
+
+    <div id="valida_sesion"></div>  <!-- En esta caja se imprime Informacion -->
+
+    <div class="page-container" style="overflow: auto;">
+        <img src="http://www.sistemasivhorsnet.com/ModeloMaster/images/ivhorsnet.png" alt="logo sygescol" width="40%">
+        <h1>INGRESO SYGESCOL</h1>
+        <form method="POST" onsubmit="valida_sesion(); return false;">
+
+            <input type="text" name="username" id="username" class="username" placeholder="Usuario"><br><br>
+            <input type="password" name="password" id="password" class="password" placeholder="Password"><br><br>
+            <button type="submit" name="guardar">Ingresar</button>
+            <div class="error"><span>+</span></div>
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+<style>
+
+    p.tmf {
+        color: #fff;
+        font-size: 19px;
+    }
+
+
+    #supersized {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        display: none;
+        z-index: -999;
+        height: 100%;
+        width: 100%;
+    }
+
+    .h1, h1 {
+        font-size: 41px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    button {
+        cursor: pointer;
+        width: 270px;
+        height: 44px;
+        margin-top: 25px;
+        padding: 0;
+        background: #760303;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        border: 1px solid #760303;
+        font-size: 21px;
+        font-weight: 700;
+        color: #fff;
+        -o-transition: all .2s;
+        -moz-transition: all .2s;
+        -webkit-transition: all .2s;
+        -ms-transition: all .2s;
+    }
+
+    body {
+        background-image: url(http://www.sistemasivhorsnet.com/ModeloMaster/reconocimiento_pae/img/fondo.png);
+        font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+        text-align: center;
+        background-repeat: no-repeat;
+        background-size: 110%;
+        color: #fff;
+    }
+</style>
+
